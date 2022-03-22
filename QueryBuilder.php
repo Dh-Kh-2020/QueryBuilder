@@ -15,12 +15,8 @@ class QueryBuilder extends DB{
     private $limit;
     private $where;
     private $orwhere;
-    // private $duplicate;
-    // private $columnCount;
 
     public $result;
-
-
 
     public function __construct(){
         parent::__construct();
@@ -28,8 +24,8 @@ class QueryBuilder extends DB{
 
     public function stmInit(){
         $this->table        = $this->table      === null ? '' : $this->table;
-        $this->columns      = $this->columns    === [] ? '*' : implode(', ', $this->columns);
-        $this->values       = $this->values     === [] ? '*' : implode(', ', $this->values);
+        $this->columns      = $this->columns    === []   ? '*' : implode(', ', $this->columns);
+        $this->values       = $this->values     === []   ? '*' : implode(', ', $this->values);
         $this->orderBy      = $this->orderBy    === null ? ''  : ' ORDER BY '.$this->orderBy;
         $this->groupBy      = $this->groupBy    === null ? ''  : ' GROUP BY '.$this->groupBy;
         $this->count        = $this->count      === null ? '' : 'count (id) as NumberOfRecords FROM'.$this->table;
@@ -121,8 +117,7 @@ class QueryBuilder extends DB{
         return $this;
     }
 
-    public function groupBy(...$column_name):DB
-    {
+    public function groupBy(...$column_name){
         $this->groupBy = implode(',', $column_name);
         return $this;
     }
